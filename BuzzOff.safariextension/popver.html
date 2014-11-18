@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+   <head>
+  <script type="text/javascript" charset="utf-8" src="jquery-1.7.min.js"></script>
+  <style type="text/css">
+		body {
+			color: #333;
+			font-family: tahoma;
+			font-size: 10px;
+			background: #F7F7F7;
+		}
+ 
+		h1 {
+			text-align: center;;
+			font-size: 12px;
+			color: #990000;
+		}
+ 
+		#container {
+			outline: 1px solid #AAA;
+			padding: 4px;
+			background: #FFF;
+			height: 350px;
+			overflow-y: auto;
+ 
+		 } 
+	    .entry {
+	    	padding-top: 6px;
+	    }
+ 
+	    .link {
+			cursor: hand; 
+			cursor: pointer;
+			color: #0099CC;
+	    }
+	    .link:hover {
+			color: blue;
+	    }
+ 
+	    .time {
+	    	padding-right: 4px;
+	    }
+  </style>
+	<script type="text/javascript" charset="utf-8">
+			function addLink(link) {
+				$("#start").after('<div class="entry"><span class="time">'+getDateTime()+'</span><span class="link" onclick=\'openLink("'+link+'")\'>'+getShortString(link,34)+'</span></div>');
+			}
+ 
+			function getShortString( str, limit ) {
+				if (str.length > limit) {
+				 return str.substring(0,limit)+"...";
+				} else {
+					return str;
+				}
+ 
+			}
+			function openLink(link) {
+					safari.application.activeBrowserWindow.openTab().url=link;
+			}
+ 
+			function getDateTime() {
+				var currentdate = new Date(); 
+				var datetime =  ('0' +currentdate.getDate()).slice(-2) + "/"
+				            + ('0' +(currentdate.getMonth()+1)).slice(-2)  + "/" 
+				            + currentdate.getFullYear() + " "  
+				            + ('0' +currentdate.getHours()).slice(-2) + ":"  
+				            + ('0' +currentdate.getMinutes()).slice(-2);
+				return datetime;
+			}
+ 
+	</script>
+   </head>
+   <h1>Visited Links Logger</h1>
+   <body>
+   	<div id="container">
+   		<span id="start" style="display:none"/>
+   	</div>
+   </body>
+</html>
